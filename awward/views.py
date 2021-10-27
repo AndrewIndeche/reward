@@ -26,6 +26,7 @@ def index(request):
     }
     return render(request, 'index.html', params)
 
+
 @login_required(login_url='login')
 def user_profile(request, username):
 
