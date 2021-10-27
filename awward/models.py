@@ -3,7 +3,7 @@ import datetime as dt
 from django.contrib.auth.models import User
 
 # Create your models here.
-Class Profile (models.Model):
+class Profile (models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE,related_name='profile')
     profile_picture = models.ImageField(upload_to = 'images/',default='alaska.jpg')
     name = models.CharField(blank=True,max_length=60)
@@ -27,8 +27,8 @@ Class Profile (models.Model):
         self.delete()
 
 
-Class Post (models.Model):
-     title = models.CharField(max_length=155)
+class Post (models.Model):
+    title = models.CharField(max_length=155)
     url = models.URLField(max_length=255)
     description = models.TextField(max_length=255)
     technologies = models.CharField(max_length=200, blank=True)
@@ -54,4 +54,36 @@ Class Post (models.Model):
         self.save()
 
 
-Class Rate (models.Model):
+class Rate (models.Model):
+    rating = (
+        (1,'1'),
+        (2,'2'),
+        (3,'3'),
+        (4,'4'),
+        (5,'5'),
+        (6,'6'),
+        (7,'7'),
+        (8,'8'),
+        (9,'9'),
+        (10,'10'),
+    )
+
+    design = models.IntegerField(choices=rating, default=0, blank=True)
+    usability = models.IntegerField(choices=rating, blank=True)
+    interface = models.PositiveIntegerField(choices=Rating_CHOICES, default=1)
+    experience = models.PositiveIntegerField(choices=Rating_CHOICES, default=1)
+    content = models.IntegerField(choices=rating, blank=True)
+    score = models.FloatField(default=0, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='rater')
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='ratings', null=True)
+
+    def save_rating(self):
+        self.save()
+
+    @classmethod
+    def get_ratings(cls, id):
+        ratings = Rating.objects.filter(post_id=id).all()
+        return ratings
+
+    def __str__(self):
+        return f'{self.post} Rate'
