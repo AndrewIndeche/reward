@@ -1,7 +1,10 @@
 from django.shortcuts import render
 from django.http  import HttpResponse,Http404
 from .models import Profile, Post,Rate
-from .forms import SignupForm, PostForm, UpdateUserForm, UpdateUserProfileForm, RatingsForm
+from .forms import SignUpForm, PostForm, UpdateUserForm, UpdateUserProfileForm, RateForm
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def index(request):
@@ -21,9 +24,7 @@ def index(request):
         'form': form,
         'users': users,
         'form':PostForm
-    except Post.DoesNotExist:
-        posts = None
-    }
+        }
     return render(request, 'index.html', params)
 
 @login_required(login_url='login')
@@ -61,7 +62,7 @@ def edit_profile(request, username):
 
 @login_required(login_url='login')
 def project(request, post):
-     post = Post.objects.get(title=post)
+    post = Post.objects.get(title=post)
     ratings = Rating.objects.filter(user=request.user, post=post).first()
     rating_status = None
     if ratings is None:

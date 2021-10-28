@@ -3,6 +3,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
+
 class SignUpForm(UserCreationForm):
     email = forms.EmailField(max_length=254, help_text=False)
 
@@ -21,14 +22,12 @@ class UpdateUserForm(forms.ModelForm):
         model = User
         fields = ('username','email')
 
-class RatingsForm(forms.ModelForm):
+class RateForm(forms.ModelForm):
     class Meta:
-        model = Rating
+        model = Rate
         fields = ['design', 'usability', 'content', 'interface', 'content', 'experience' ]
 
 class PostForm(forms.ModelForm):
-    photo = ImageField(label='')
-
     class Meta:
         model = Post
         fields = ('photo', 'title', 'url', 'description', 'technologies',)
