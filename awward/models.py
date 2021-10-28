@@ -6,12 +6,12 @@ from django.db.models.signals import post_save
 
 # Create your models here.
 class Profile (models.Model):
-    username = models.OneToOneField(User, on_delete=models.CASCADE,related_name='profile')
+    user = models.OneToOneField(User, on_delete=models.CASCADE,related_name='profile')
     profile_picture = models.ImageField(upload_to = 'images/',default='alaska.jpg')
     name = models.CharField(blank=True,max_length=60)
     bio = models.TextField(blank=True,max_length=500)
     location = models.CharField(max_length=60, blank=True)
-    email = models.EmailField(max_length=100, blank=True)
+    contact = models.EmailField(max_length=100, blank=True)
 
     def __str__(self):
         return f'{self.user.username} Profile'
@@ -24,10 +24,6 @@ class Profile (models.Model):
     @receiver(post_save, sender=User)
     def save_user_profile(sender, instance, **kwargs):
         instance.profile.save()
-
-    def delete_profile(self):
-        self.delete()
-
 
 class Post (models.Model):
     title = models.CharField(max_length=155)
