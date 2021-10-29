@@ -14,7 +14,7 @@ class SignUpForm(UserCreationForm):
 class UpdateUserProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['profile_picture','bio','username','location','email']
+        fields = ['profile_picture','bio','location']
 
 class UpdateUserForm(forms.ModelForm):
     email = forms.EmailField(max_length=254,help_text=False)

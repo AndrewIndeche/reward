@@ -34,3 +34,32 @@ class ProfileTest(TestCase):
         self.assertIsInstance(self.user.profile, Profile)
         self.user.save()
         self.assertIsInstance(self.user.profile, Profile)
+class TestRating(TestCase):
+    ''' test class for Rating model '''
+    def setUp(self):
+        ''' method called before all tests '''
+        self.test_user = User(username='Andrew', password='123')
+        self.test_user.save()
+        self.test_profile = self.test_user.profile
+        self.test_profile.save()
+        self.test_post = Post(image='images/test.jpg', title='some text',description='some info', profile=self.test_profile, live_link='https://www.google.com', created_on=datetime.now())
+        self.test_post.save()
+
+        self.test_rate = Rating(interface=5, experience=6, content=5, user=self.test_profile, post=self.test_post)
+
+    def tearDown(self):
+        ''' method called after every test '''
+        self.test_user.delete() #deletes it's profile too
+        Post.objects.all().delete()
+        Rating.objects.all().delete()
+
+    def test_instance(self):
+        ''' method to test instance creation '''
+        self.assertIsInstance(self.test_rate, Rating)
+
+    def test_save_and_delete_rating(self):
+        ''' test method to save and delete ratings'''
+        self.test_rate.save_rating()
+        self.assertEqual(len(Rating.objects.all()), 1)
+        self.test_rate.delete_rating()
+        self.assertEqual(len(Rating.objects.all()), 0)

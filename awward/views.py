@@ -5,27 +5,27 @@ from .forms import SignUpForm, PostForm, UpdateUserForm, UpdateUserProfileForm, 
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+import random
 
 # Create your views here.
 def index(request):
-    form = PostForm
-    users = User.objects.exclude(id=request.user.id)
-    if request.method == 'POST':
-        form = PostForm(request.POST, request.FILES)
+    if request.method == "POST":
+        form = PostForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
-            post.user = request.user.profile
+            post.user = request.user
             post.save()
-            return HttpResponseRedirect(request.path_info)
     else:
         form = PostForm()
-    params = {
-        'post': post[::-1],
-        'form': form,
-        'users': users,
-        'form':PostForm
-        }
-    return render(request, 'index.html', params)
+
+    try:
+        posts = Post.objects.all()
+        posts = posts[::-1]
+
+    except Post.DoesNotExist:
+        posts = None
+    return render(request, 'index.html', {'posts': posts, 'form': form})
+
 
 @login_required(login_url='login')
 def profile(request, username):
