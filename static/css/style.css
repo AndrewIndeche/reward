@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital@1&display=swap');
+
+@font-face {
+ font-family: 'Poppins';
+}
+
+h2.topnav-centered{
+  color: black;
+  padding-left: 20em;
+  text-align: center;
+}
+p{
+  color:black;
+  padding-left: 45em;
+}
+.card{
+  width:115em;
+  height:40em;
+}

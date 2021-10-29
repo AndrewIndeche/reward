@@ -1,13 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+{% load bootstrap4 %}
 <div class="collapse" id="navbarToggleExternalContent">
   <div class="bg-dark p-4">
     <h5 class="text-white h4">Collapsed content</h5>
     <span class="text-muted">Toggleable via the navbar brand.</span>
-  </div>
+    </div>
 </div>
-<nav class="navbar navbar-dark bg-dark">
+<nav class="navbar navbar-light bg-light">
+   <div class="main-wrapper">
+     <p>The awards of design,creativity and innovation on the internet</p>
+     </div>
   <div class="container-fluid">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+    <h2 class="topnav-centered"><strong>awwwards</strong></h2>
+    ARE YOU A MEMBER?<strong>REGISTER/LOGIN</strong>
+     <a class="login btn btn-sm btn-info"> SUBMIT YOUR SITE!</a>
   </div>
 </nav>
+{% endblock %}
