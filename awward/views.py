@@ -10,6 +10,7 @@ import random
 # Create your views here.
 def index(request):
     if request.method == "POST":
+        FORM = SignUpForm()
         form = PostForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
@@ -17,6 +18,9 @@ def index(request):
             post.save()
     else:
         form = PostForm()
+    params = {
+        'FORM':SignUpForm
+    }
 
     try:
         posts = Post.objects.all()
@@ -24,7 +28,7 @@ def index(request):
 
     except Post.DoesNotExist:
         posts = None
-    return render(request, 'index.html', {'posts': posts, 'form': form})
+    return render(request, 'index.html', {'posts': posts, 'form': form , 'FORM':SignUpForm })
 
 
 @login_required(login_url='login')
