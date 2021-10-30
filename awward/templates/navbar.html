@@ -12,6 +12,7 @@
    <div class="main-wrapper">
      <p>The awards of design,creativity and innovation on the internet</p>
      </div>
+  <div class="line"></div>
   <div class="container-fluid">
       <h2 class="topnav-centered"><strong>awwwards</strong></h2>
     <span class="signup" ARE YOU A MEMBER? data-toggle="modal" data-target="#SignUpForm" ovalidate enctype="multipart/form-data" alt="" <strong>REGISTER/LOGIN</strong>
@@ -28,10 +29,15 @@
                                 </button>
                             </div>
                             <div class="modal-body">
+                                <h2>SIGN-UP</h2>
                                 <form action="" method="post" enctype="multipart/form-data" novalidate>
-                                    Have an account? <a href="/accounts/login"">Log In</a>
+                                    Have an account? <a href="/accounts/login" data-target="#LoginForm" ovalidate enctype="multipart/form-data">Log In</a>
                                     {% csrf_token %}
                                     {% bootstrap_form FORM %}
+                                    <div class="mb-2">
+                                    <button class="login-button" href="/accounts/register/" type="submit">Sign Up</button>
+                                     <input type="hidden" name="next" value="{{next}}">
+                                    </div>
                                     <button type="button" class="btn btn-sm btn-outline-danger" data-dismiss="modal">
                                         Close
                                     </button>
@@ -40,4 +46,4 @@
                         </div>
                     </div>
                 </div>
-{% endblock %}
+        {% endblock %}

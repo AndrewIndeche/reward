@@ -2,10 +2,12 @@ from django.shortcuts import render
 from django.http  import HttpResponse,Http404
 from .models import Profile, Post,Rate
 from .forms import SignUpForm, PostForm, UpdateUserForm, UpdateUserProfileForm, RateForm
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate,views,forms
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ObjectDoesNotExist
 import random
+from django.http import HttpResponseRedirect
 
 # Create your views here.
 def index(request):
