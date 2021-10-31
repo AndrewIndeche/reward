@@ -18,8 +18,9 @@ from django.urls import path
 from django.conf.urls import url,include
 
 urlpatterns = [
-    url('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
     url(r'',include('awward.urls')),
     url(r'^accounts/', include('django_registration.backends.one_step.urls')),
-    url('accounts/', include('django.contrib.auth.urls')),
+    url(r'^accounts/', include('django.contrib.auth.urls')),
+
 ]

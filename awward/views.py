@@ -35,7 +35,9 @@ def index(request):
 
 @login_required(login_url='login')
 def profile(request, username):
-    return render(request, 'profile.html')
+    current_user = request.user.profile
+    pics = Post.objects.filter(profile=current_user).all()
+    return render(request, 'profile.html', {'pics':pics})
 
 @login_required(login_url='login')
 def user_profile(request, username):
@@ -45,7 +47,7 @@ def user_profile(request, username):
     params = {
         'user_prof': user_prof,
     }
-    return render(request, 'user_profile.html', params)
+    return render(request, 'userprofile.html', params)
 
 @login_required(login_url='login')
 def edit_profile(request, username):
