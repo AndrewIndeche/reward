@@ -15,57 +15,55 @@
   <div class="line"></div>
   <div class="container-fluid">
       <h2 class="topnav-centered"><strong>awwwards</strong></h2>
+      <ul class="navbar-nav navbar-right">
+         {% if user.is_authenticated%}
+         <li class="nav-item dropdown">
+             <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false">{{ user.username|title }} <img class="rounded-circle nav-img"
+                                                                     src="{{ user.profile.profile_picture.url }}"
+                                                                     alt="">
+             </a>
+             <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                 <a class="dropdown-item text-center" href="{% url 'profile' user.username %}">Profile</a>
+                 <hr>
+                 <a class="dropdown-item text-center" href="{% url 'edit' user.username  %}"> Edit profile</a>
+                 <hr>
+                   {% else %}
+                 <a href="{% url 'logout' %}" class="text-secondary text-center dropdown-item">Log Out</a>
+             </div>
+         </li>
+           {% endif %}
     <span class="signup" ARE YOU A MEMBER? data-toggle="modal" data-target="#SignUpForm" ovalidate enctype="multipart/form-data" alt="" <strong>REGISTER/LOGIN</strong>
      <a class="login btn btn-sm btn-info" style="height:60px; width:200px;padding-top:20px;"><strong>SUBMIT YOUR SITE!</strong></a>
   </div>
-  <ul class="navbar-nav navbar-right">
-               {% if user.is_authenticated%}
-               <li class="nav-item dropdown">
-                   <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                      aria-haspopup="true"
-                      aria-expanded="false">{{ user.username|title }} <img class="rounded-circle nav-img"
-                                                                           src="{{ user.profile.profile_picture.url }}"
-                                                                           alt="">
-                   </a>
-                   <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                       <a class="dropdown-item text-center" href="{% url 'profile' user.username %}">Profile</a>
-                       <hr>
-                       <a class="dropdown-item text-center" href="{% url 'edit' user.username  %}"> Edit profile</a>
-                       <hr>
-                       <a href="{% url 'logout' %}" class="text-secondary text-center dropdown-item">Log Out</a>
-
-
-                   </div>
-               </li>
-               {% else %}
-
+</nav>
 <div class="modal fade" id="SignUpForm" tabindex="-1" role="dialog"
-                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <h2>SIGN-UP</h2>
-                                <form action="" method="post" enctype="multipart/form-data" novalidate>
-                                    Have an account? <a href="{% url 'login' %}"  data-target="#LoginForm" ovalidate enctype="multipart/form-data">Log In</a>
-                                    {% csrf_token %}
-                                    {% bootstrap_form FORM %}
-                                    <div class="mb-2">
-                                    <button class="login-button" href="/accounts/register/" type="submit">Sign Up</button>
-                                     <input type="hidden" name="next" value="{{next}}">
-                                    </div>
-                                    <button type="button" class="btn btn-sm btn-outline-danger" data-dismiss="modal">
-                                        Close
-                                    </button>
-                                </form>
-                            </div>
+                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
+                            <div class="modal-body">
+                            <h2>SIGN-UP</h2>
+                            <form action="" method="post" enctype="multipart/form-data" novalidate>
+                                Have an account? <a href="/accounts/login" data-target="#LoginForm" ovalidate enctype="multipart/form-data">Log In</a>
+                                {% csrf_token %}
+                                {% bootstrap_form FORM %}
+                                <div class="mb-2">
+                                <button class="login-button" href="/accounts/register/" type="submit">Sign Up</button>
+                                 <input type="hidden" name="next" value="{{next}}">
+                                </div>
+                                <button type="button" class="btn btn-sm btn-outline-danger" data-dismiss="modal">
+                                Close
+                                </button>
+                            </form>
+                        </div>
+
                     </div>
                 </div>
-                {% endif %}
-                 </nav>
+            </div>
         {% endblock %}
