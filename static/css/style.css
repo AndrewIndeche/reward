@@ -1,14 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital@1&display=swap');
+@import url('http://fonts.googleapis.com/css2?family=Rock+Salt&display=swap');
 
 @font-face {
- font-family: 'Poppins';
+ font-family: 'Rock Salt';
+ font-weight: 400;
+ src:url('.css/fonts/RockSalt-Regular.ttf') format('truetype');
 }
 
-h2.topnav-centered{
-  color: black;
-  padding-left: 20em;
-  text-align: center;
-}
 p{
   color:black;
   padding-left: 45em;
@@ -37,7 +34,9 @@ p1{
 .row {
   display: flex;
 }
-
+.topnav-centered{
+  padding-left: 10em;
+}
 .column {
   flex: 33.33%;
   padding: 5px;

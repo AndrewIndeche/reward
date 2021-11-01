@@ -11,30 +11,49 @@
 <nav class="navbar navbar-light bg-light">
    <div class="main-wrapper">
      <p>The awards of design,creativity and innovation on the internet</p>
+       <h2 class="topnav-centered"><strong>awwwards</strong></h2>
      </div>
   <div class="line"></div>
   <div class="container-fluid">
-      <h2 class="topnav-centered"><strong>awwwards</strong></h2>
+      <p class="hidden"><strong>SUBMIT YOUR FAVORITE WEBSITES FOR REVIEW</strong></P>
       <ul class="navbar-nav navbar-right">
           {% if user.is_authenticated%}
-           <li class="nav-item dropdown">
-             <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false">{{ user.username}} <img class="rounded-circle nav-img"
-                                                                     src="{{ user.profile.profile_picture.url }}"
-                                                                     alt="">
-             </a>
-             <li>
-              <a href="/accounts/password/change">Change Password</a>
-              </li>
-                 <a class="dropdown-item text-center" href="{% url 'profile'%}">Profile</a>
+               <img src="{{user.profile.profile_picture.url }}" alt="" width="60" height="60" class="rounded-circle ">
+                <strong>{{ user.username}}</strong>
+                   <a href="{% url 'profile'%}"> Profile</a>
                  <hr>
-                 <a class="dropdown-item text-center" href="{% url 'edit_profile'%}"> Edit profile</a>
+                 <a href="{% url 'edit_profile'%}"> Edit profile</a>
                  <hr>
+                  <a class="login btn btn-sm btn-info" data-toggle="modal" data-target="#PostForm" ovalidate enctype="multipart/form-data" alt="" style="height:60px; width:200px;padding-top:20px;"><strong>SUBMIT YOUR SITE!</strong></a>
                  <a href="{% url 'logout' %}" class="text-secondary text-center dropdown-item">Log Out</a>
+                  <hr>
+                  <div class="modal fade" id="PostForm" tabindex="-1" role="dialog"
+                                  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                  <div class="modal-dialog modal-dialog-centered" role="document">
+                                      <div class="modal-content">
+                                          <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                  <span aria-hidden="true">&times;</span>
+                                              </button>
+                                          </div>
+                                               <div class="modal-body">
+                                                <form action=" " method="post" enctype="multipart/form-data">
+                                                  {% csrf_token %}
+                                                  {% bootstrap_form form %}
+                                                  <div class="mb-2">
+                                                <input type="submit" class="btn btn-sm btn-info" value="Save"/>
+                                                   </div>
+                                                  <button type="button" class="btn btn-sm btn-outline-danger" data-dismiss="modal">
+                                                  Close
+                                                  </button>
+                                              </form>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
               {% else %}
           <span class="signup" ARE YOU A MEMBER? data-toggle="modal" data-target="#SignUpForm" ovalidate enctype="multipart/form-data" alt="" <strong>REGISTER/LOGIN</strong>
-     <a class="login btn btn-sm btn-info" style="height:60px; width:200px;padding-top:20px;"><strong>SUBMIT YOUR SITE!</strong></a>
+     <a class="login btn btn-sm btn-info" data-toggle="modal" data-target="#PostForm" ovalidate enctype="multipart/form-data" alt=""  style="height:60px; width:200px;padding-top:20px;"><strong>SUBMIT YOUR SITE!</strong></a>
   </div>
 </nav>
 {% endif %}
