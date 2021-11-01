@@ -13,6 +13,14 @@ from django.http import HttpResponseRedirect
 def index(request):
     if request.method == "POST":
         FORM = SignUpForm()
+        if FORM.is_valid():
+            FORM.save()
+            username = FORM.cleaned_data.get('username')
+            raw_password = FORM.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('index')
+
         form = PostForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
@@ -31,7 +39,6 @@ def index(request):
     except Post.DoesNotExist:
         posts = None
     return render(request, 'index.html', {'posts': posts, 'form': form , 'FORM':SignUpForm })
-
 
 @login_required(login_url='login')
 def profile(request, username):

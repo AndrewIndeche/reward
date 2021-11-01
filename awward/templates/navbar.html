@@ -20,25 +20,24 @@
            <li class="nav-item dropdown">
              <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
                 aria-haspopup="true"
-                aria-expanded="false">{{ user.username|title }} <img class="rounded-circle nav-img"
+                aria-expanded="false">{{ user.username}} <img class="rounded-circle nav-img"
                                                                      src="{{ user.profile.profile_picture.url }}"
                                                                      alt="">
              </a>
              <li>
               <a href="/accounts/password/change">Change Password</a>
               </li>
-             <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                 <a class="dropdown-item text-center" href="{% url 'profile' user.username %}">Profile</a>
+                 <a class="dropdown-item text-center" href="{% url 'profile'%}">Profile</a>
                  <hr>
-                 <a class="dropdown-item text-center" href="{% url 'edit' user.username  %}"> Edit profile</a>
+                 <a class="dropdown-item text-center" href="{% url 'edit_profile'%}"> Edit profile</a>
                  <hr>
                  <a href="{% url 'logout' %}" class="text-secondary text-center dropdown-item">Log Out</a>
-             </div>
               {% else %}
           <span class="signup" ARE YOU A MEMBER? data-toggle="modal" data-target="#SignUpForm" ovalidate enctype="multipart/form-data" alt="" <strong>REGISTER/LOGIN</strong>
      <a class="login btn btn-sm btn-info" style="height:60px; width:200px;padding-top:20px;"><strong>SUBMIT YOUR SITE!</strong></a>
   </div>
 </nav>
+{% endif %}
 <div class="modal fade" id="SignUpForm" tabindex="-1" role="dialog"
                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -48,10 +47,8 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                           {% endif %}
-                            <div class="modal-body">
-                            <h2>SIGN-UP</h2>
-                            <form action="/accounts/register/" method="post" enctype="multipart/form-data" novalidate>
+                             <div class="modal-body">
+                              <form action="/accounts/register/" method="post" enctype="multipart/form-data" novalidate>
                                 Have an account? <a href="/accounts/login" data-target="#LoginForm" ovalidate enctype="multipart/form-data">Log In</a>
                                 {% csrf_token %}
                                 {% bootstrap_form FORM %}
