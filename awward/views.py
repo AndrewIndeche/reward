@@ -45,6 +45,15 @@ def index(request):
 def profile(request):
     return render(request, 'profile.html')
 
+def user_profile(request, username):
+    user_prof = get_object_or_404(User, username=username)
+    if request.user == user_prof:
+        return redirect('profile', username=request.user.username)
+    params = {
+        'user_prof': user_prof,
+    }
+    return render(request, 'userprofile.html', params)
+
 @login_required(login_url='login')
 def edit_profile(request):
     if request.method == 'POST':
@@ -65,8 +74,7 @@ def edit_profile(request):
 
 @login_required(login_url='login')
 def project(request, post):
-    post = Post.objects.get(title=post)
-    ratings = Rating.objects.filter(user=request.user, post=post).first()
+    ratings = Rate.objects.filter(user=request.user, post=post)
     rating_status = None
     if ratings is None:
         rating_status = False
@@ -79,7 +87,7 @@ def project(request, post):
             rate.user = request.user
             rate.post = post
             rate.save()
-            post_ratings = Rating.objects.filter(post=post)
+            post_ratings = Rate.objects.filter(post=post)
 
             design_ratings = [d.design for d in post_ratings]
             design_average = sum(design_ratings) / len(design_ratings)
@@ -102,11 +110,12 @@ def project(request, post):
         form = RateForm()
     params = {
         'post': post,
-        'rate_form': form,
+        'rating_form': form,
         'rating_status': rating_status
 
     }
     return render(request, 'project.html', params)
+
 def search_project(request):
     if request.method == 'GET':
         title = request.GET.get("title")

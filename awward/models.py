@@ -7,7 +7,7 @@ from django.db.models.signals import post_save
 # Create your models here.
 class Profile (models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile_picture = models.ImageField(upload_to = 'images/',default='alaska.jpg')
+    profile_picture = models.ImageField(upload_to = 'images/',default='404.jpg')
     name = models.CharField(blank=True,max_length=60)
     bio = models.TextField(blank=True,max_length=500)
     location = models.CharField(max_length=60, blank=True)
@@ -30,7 +30,7 @@ class Post (models.Model):
     url = models.URLField(max_length=255)
     description = models.TextField(max_length=255)
     technologies = models.CharField(max_length=200, blank=True)
-    photo = models.ImageField(default='alaska.jpg')
+    photo = models.ImageField(upload_to = 'images/',default='404.jpg')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts")
     date = models.DateTimeField(auto_now_add=True, blank=True)
 

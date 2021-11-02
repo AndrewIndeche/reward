@@ -11,7 +11,7 @@
 <div class="content-view">
   <section class="main">
     <div class="card">
-        <img src="/static/images/bg.jpg">
+        <img src="/static/img/bg.jpg">
         </div>
     </section>
   <p1><strong>Sites of the day</strong></p1>
@@ -19,14 +19,23 @@
       <div class ="container">
     <div class="row">
       <div class="column">
-      <img src="/static/images/img1.jpg" style="width:100%">
+      <img src="/static/img/img1.jpg" style="width:100%">
         </div>
         <div class="column">
-      <img src="/static/images/img2.jpg" style="width:100%">
+      <img src="/static/img/img2.jpg" style="width:100%">
         </div>
           <div class="column">
-      <img src="/static/images/img3.jpg" style="width:100%">
+      <img src="/static/img/img3.jpg" style="width:100%">
           </div>
+           {% for post in posts %}
+          <div class="column">
+        <img src="{{ post.photo.url }}" style="width:100%">
+        {{post.title}}<br>
+        {{post.date|date}}<br>
+        By {{post.user.username|title}}<br>
+        <button class="btn btn-info"><a href="{% url 'project' post.title %}" style="text-decoration:none;color:white;">Rate</a></button>
+          </div>
+           {% endfor %}
           </div>
       </div>
       </section>

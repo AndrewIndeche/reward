@@ -51,7 +51,7 @@
                                       </div>
                                   </div>
                               </div>
-              {% else %}
+                    {% else %}
           <span class="signup" ARE YOU A MEMBER? data-toggle="modal" data-target="#SignUpForm" ovalidate enctype="multipart/form-data" alt="" <strong>REGISTER/LOGIN</strong>
      <a class="login btn btn-sm btn-info" data-toggle="modal" data-target="#PostForm" ovalidate enctype="multipart/form-data" alt=""  style="height:60px; width:200px;padding-top:20px;"><strong>SUBMIT YOUR SITE!</strong></a>
   </div>
@@ -60,6 +60,7 @@
 <div class="modal fade" id="SignUpForm" tabindex="-1" role="dialog"
                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
+                  <h3>SIGNUP</h3>
                     <div class="modal-content">
                         <div class="modal-header">
                               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -67,6 +68,7 @@
                             </button>
                         </div>
                              <div class="modal-body">
+                               <h3>SIGNUP</h3>
                               <form action="/accounts/register/" method="post" enctype="multipart/form-data" novalidate>
                                 Have an account? <a href="/accounts/login" data-target="#LoginForm" ovalidate enctype="multipart/form-data">Log In</a>
                                 {% csrf_token %}
